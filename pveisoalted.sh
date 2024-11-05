@@ -9,8 +9,10 @@ printf "%-15s %-10s %-5s %-10s\n" "Interface" "Isolated" "Type" "Local FW"
 # Loop through each interface in the directory
 for iface in $(ls $net_dir); do
     # Check if the interface is a tap or veth
-    if [[ $iface == tap* || $iface == veth* ]]; then
+    if [[ $iface == tap* || $iface == veth* $iface == vnet* ]]; then
         # Determine the type of interface
+        if [[ $iface == tap* ]]; then
+            type="PVE-KVM"
         if [[ $iface == tap* ]]; then
             type="KVM"
         elif [[ $iface == veth* ]]; then
